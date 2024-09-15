@@ -4,5 +4,5 @@ RUN apt install apache2 -y
 #RUN apt install –y apache2-utils
 RUN apt clean
 EXPOSE 80
-COPY /home/ankit/index.html /var/www/html/
+COPY ./index.html/ /var/www/html/
 CMD ["apache2ctl", "-D", "FOREGROUND"]
