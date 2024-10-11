@@ -44,17 +44,28 @@ pipeline {
                 message 'Deploy?'
                 ok 'Do it!'
                 parameters {
-                    string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
+                    //string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
+                    choice(TARGET_ENVIRONMENT: "PROD", choices: ['PROD', 'PROD1', 'PROD2'])
                 }
               }
             steps {
-                // Deploy your application to a target environment (e.g., staging, production)
-                sh '''
+                script {
+                    if (TARGET_ENVIRONMENT.PROD)
+                    sh '''
                 cp index.html /var/www/html/
                 echo "Website is up"
                 '''
+                if (TARGET_ENVIRONMENT.PROD1)
+                    sh '''
+                cp * /var/www/html/
+                echo "Website is up"
+                '''
+                }
+                // Deploy your application to a target environment (e.g., staging, production)
             }
         }
+
+
     }
 
     post {
