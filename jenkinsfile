@@ -47,6 +47,7 @@ pipeline {
                     string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
                 }
               }
+              when { expression { params.TARGET_ENVIRONMENT == "PROD" } }
             steps {
                 // Deploy your application to a target environment (e.g., staging, production)
                 sh '''
