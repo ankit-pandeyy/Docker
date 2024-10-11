@@ -55,7 +55,7 @@ pipeline {
                 cp index.html /var/www/html/
                 echo "Website is up"
                 '''
-                if (TARGET_ENVIRONMENT.PROD1)
+                else if (TARGET_ENVIRONMENT.PROD1)
                     sh '''
                 cp * /var/www/html/
                 echo "Website is up"
