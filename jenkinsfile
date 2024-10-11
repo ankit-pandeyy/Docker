@@ -44,11 +44,9 @@ pipeline {
                 message 'Deploy?'
                 ok 'Do it!'
                 parameters {
-                    //string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
-                  choice(name: "TARGET_ENVIRONMENT" , choices: ['PROD', 'PROD1', 'PROD2'])
+                    string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
                 }
               }
-             if { params.TARGET_ENVIRONMENT == "PROD" } }
             steps {
                 // Deploy your application to a target environment (e.g., staging, production)
                 sh '''
