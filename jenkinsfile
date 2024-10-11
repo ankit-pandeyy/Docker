@@ -55,11 +55,6 @@ pipeline {
                 cp index.html /var/www/html/
                 echo "Website is up"
                 '''
-                else if (TARGET_ENVIRONMENT.PROD1)
-                    sh '''
-                cp * /var/www/html/
-                echo "Website is up"
-                '''
                 }
                 // Deploy your application to a target environment (e.g., staging, production)
             }
