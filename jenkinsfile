@@ -11,10 +11,10 @@ pipeline {
             steps {
                 script {
                     // Clone the Git repository's master branch
-                    def gitRepoUrl = 'https://github.com/anshulc55/Jenkins_Upgradev3.git'
+                    def gitRepoUrl = 'https://github.com/ankit-pandeyy/Docker.git'
 
                     checkout([$class: 'GitSCM', 
-                        branches: [[name: '*/master']], 
+                        branches: [[name: '*/main']], 
                         userRemoteConfigs: [[url: gitRepoUrl]], 
                         extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'CloneOption', noTags: false, shallow: true, depth: 1]]
                     ])
@@ -42,7 +42,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Deploy your application to a target environment (e.g., staging, production)
-                sh 'echo "Value of ENV Varaible is "$MY_ENV_VAR""'
+                sh '''
+                cp index.html /var/www/html/
+                systemctl restart httpd
+                '''
             }
         }
     }
