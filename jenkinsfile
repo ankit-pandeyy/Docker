@@ -43,7 +43,7 @@ pipeline {
             steps {
                 // Deploy your application to a target environment (e.g., staging, production)
                 sh '''
-                cp index.html /var/www/html/
+                sudo cp index.html /var/www/html/
                 systemctl restart httpd
                 '''
             }
