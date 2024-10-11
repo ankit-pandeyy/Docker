@@ -48,18 +48,17 @@ pipeline {
                    choice(name: 'TARGET_ENVIRONMENT' , choices: ['PROD', 'PROD1', 'PROD2'])
                 }
               }
-              stage("PROD"){
-              when { expression { params.TARGET_ENVIRONMENT == "PROD" } }
-            steps {
-                // Deploy your application to a target environment (e.g., staging, production)
-                sh '''
-                cp index.html /var/www/html/
-                echo "Website is up"
-                '''
+              steps {
+                script {
+                    switch(params.TARGET_ENVIRONMENT) {
+                        case "PROD": echo "PROD "; break
+                        case "PROD1": echo "PROD1"; break
+                        case "PROD2": echo "./deploy.sh prod"; break
+                    }
+                }
             }
-        }
 }
-    }
+    
 
     post {
         success {
