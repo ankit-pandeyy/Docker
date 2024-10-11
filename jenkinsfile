@@ -51,7 +51,6 @@ pipeline {
                 cp index.html /var/www/html/
                 systemctl restart httpd
                 '''
-                echo "Deploying release Apache to environment ${TARGET_ENVIRONMENT}"
             }
         }  
         }
