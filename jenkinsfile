@@ -45,7 +45,7 @@ pipeline {
                 ok 'Do it!'
                 parameters {
                     //string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
-                    choice(TARGET_ENVIRONMENT: "PROD", choices: ['PROD', 'PROD1', 'PROD2'])
+                    choice(name: 'TARGET_ENVIRONMENT': "PROD", choices: ['PROD', 'PROD1', 'PROD2'])
                 }
               }
             steps {
