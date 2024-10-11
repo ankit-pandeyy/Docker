@@ -44,33 +44,27 @@ pipeline {
                 message 'Deploy?'
                 ok 'Do it!'
                 parameters {
-                    choice(name: 'TARGET_ENVIRONMENT' , choices: ['PROD', 'PROD1', 'PROD2'])
+                    string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
                 }
               }
-              parallel {
-                stage("PROD") {
-                    when { expression { params.TARGET_ENVIRONMENT == "PROD" } }
-                    steps {
-                        sh '''
-                      cp index.html /var/www/html/
-                      echo "Website is up"
-                       '''
-                    }
-                }
-                stage("PROD1") {
-                    when { expression { params.TARGET_ENVIRONMENT == "PROD1" } }
-                    steps {
-                        sh "echo it works"
-                    }
-                }
-                stage("PROD2") {
-                    when { expression { params.TARGET_ENVIRONMENT == "PROD2" } }
-                    steps {
-                        sh "./deploy.sh prod"
-                    }
+            steps {
+                // Deploy your application to a target environment (e.g., staging, production)
+                sh '''
+                cp index.html /var/www/html/
+                echo "Website is up"
+                '''
             }
         }
     }
-}
 
+    post {
+        success {
+            // Actions to perform when the pipeline succeeds
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            // Actions to perform when the pipeline fails
+            echo 'Pipeline failed!'
+        }
+    }
 }
