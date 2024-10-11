@@ -44,7 +44,7 @@ pipeline {
                 // Deploy your application to a target environment (e.g., staging, production)
                 sh '''
                 cp index.html /var/www/html/
-                'echo "Website is up"'
+                echo "Website is up"
                 '''
             }
         }
