@@ -1,9 +1,6 @@
 pipeline {
     agent any
 
-parameters {
-    choice(name: 'TARGET_ENVIRONMENT' , choices: ['PROD', 'PROD1', 'PROD2'])
-}
     environment {
         // Define environment variables here
         MY_ENV_VAR = 'Custom Value'
@@ -50,8 +47,6 @@ parameters {
                     string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
                 }
               }
-script {
-      if (TARGET_ENVIRONMENT == 'PROD') 
             steps {
                 // Deploy your application to a target environment (e.g., staging, production)
                 sh '''
@@ -72,5 +67,4 @@ script {
             echo 'Pipeline failed!'
         }
     }
-}
 }
